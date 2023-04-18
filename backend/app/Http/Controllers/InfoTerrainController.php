@@ -18,18 +18,6 @@ class InfoTerrainController extends Controller
     }
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'img1' => 'required|image',
-        //     'img2' => 'required|image',
-        //     'img3' => 'required|image',
-        //     'title' => 'required',
-        //     'description' => 'required',
-        //     'location' => 'required',
-        //     'type' => 'required',
-        //     'surface' => 'required',
-        //     'ville' => 'required',
-        //     'price' => 'required',
-        // ]);
         $img1 = time().'.'.request()->img1->getClientOriginalExtension();
         request()->img1->move(public_path('img1'), $img1);
         $img2 = time().'.'.request()->img2->getClientOriginalExtension();
@@ -48,23 +36,21 @@ class InfoTerrainController extends Controller
         $terrain->ville = $request->ville;
         $terrain->price = $request->price;
         $terrain->save();
-        // $img1 =Str::random().'.'.$request->img1->getClientOriginalExtension();
-        // Storage::disk('public')->putFileAs('img1',$request->img1,$img1);
-        // //InfoTerrain::create($request->post()+ ['img1' => $img1]);
-        // $img2 =Str::random().'.'.$request->img2->getClientOriginalExtension();
-        // Storage::disk('public')->putFileAs('img2',$request->img2,$img2);
-        // //InfoTerrain::create($request->post()+ ['img2' => $img2]);
-        // $img3 =Str::random().'.'.$request->img3->getClientOriginalExtension();
-        // Storage::disk('public')->putFileAs('img3',$request->img3,$img3);
-        // InfoTerrain::create($request->post()+ ['img1' => $img1]+ ['img2' => $img2]+ ['img3' => $img3]);
         return response()->json([
             'message'=>'Stade added successful'
         ]);
     }
-    public function show(string $id)
-    {
-        return InfoTerrain::findOrFail($id)->select('id','img1','img2','img3','title','description','location','type','surface','ville','price')->get();
-    } 
+    public function show($id){
+
+        // Récupérer les données de la page par ID depuis la base de données
+        $infoTerrain=InfoTerrain::find($id);
+        if(!$infoTerrain){
+            return redirect()->route('InfoView')->with(['error'=>'Not Exist']);
+        }
+
+        return view('InfoView',compact('InfoTerrain'));
+
+    }
     public function search(Request $request)
     {
         $searchTerm = $request->input('searchTerm');

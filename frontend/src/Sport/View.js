@@ -9,6 +9,7 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 import './View.css';
 const View = () => {
+    
     const [terrain,setTerrain] =useState([])
     useEffect(() => {
         fetchTerrain();
@@ -20,6 +21,7 @@ const View = () => {
             setTerrain(data) 
         })
     }
+    
     return(
         <div style={{backgroundColor:'#d0ffb7'}}>
             <div>

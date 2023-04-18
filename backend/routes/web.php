@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\infoTerrainController;
+use App\Http\Controllers\InfoTerrainController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,7 +12,7 @@ use App\Http\Controllers\infoTerrainController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::get('/InfoView/{id}', 'InfoTerrainController@show');
 Route::get('/', function () {
     return view('welcome');
 });

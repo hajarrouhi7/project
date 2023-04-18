@@ -24,8 +24,6 @@ const ListView = () => {
         await axios.delete('http://127.0.0.1:8000/api/InfoTerrain/'+ id)
         .then(({data})=>{
             console.log(data.message)
-           
-
             fetchTerrain();
         }).catch(({response: {data}}) => {
             console.log(data.message)

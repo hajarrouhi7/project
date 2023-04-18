@@ -14,7 +14,8 @@ use App\Http\Controllers\InfoTerrainController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::resource('InfoTerrain',InfoTerrainController::class);
+Route::resource('/InfoTerrain',InfoTerrainController::class);
+Route::get('/InfoView/{id}', [InfoTerrainController::class,'show']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

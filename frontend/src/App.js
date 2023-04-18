@@ -28,7 +28,7 @@ function App() {
         <Route exact path='*' element={<Home/>}/>
         <Route path='/Search' element={<Search/>}/>
         <Route path='/View' element={<View/>}/>
-        <Route path='/InfoView/:id' element={<InfoView/>}/>
+        <Route path="/InfoView/:id" element={<InfoView/>}/>
         <Route path='/BookDetails' element={<BookDetails/>}/>
         <Route path='/Payment' element={<PaymentDetails/>}/>
         <Route path='/CardBook' element={<CardBook/>}/>
