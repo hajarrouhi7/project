@@ -10,20 +10,45 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-const InfoView = ({id}) => {
+const InfoView = () => {
+    const [id, setId] = useState(null);
     const [terrain,setTerrain] =useState([])
     useEffect(() => {
-        fetchTerrain();
-       
-    }, []);
-    const fetchTerrain =async() =>{ // data from database
-        await axios.get(`http://127.0.0.1:8000/api/InfoTerrain/${id}`)
-        .then(({data})=>{
-            setTerrain(data) 
-        })
+    if (id !== null) {
+        fetch(`http://127.0.0.1:8000/api/InfoView/${id}`)
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
     }
+    }, [id]);
 
-    //const [terrain,setTerrain] =useState([])
+    //const [id, setId] = useState(); // initialize the ID to 1
+    // const [terrain,setTerrain] =useState([])
+    // useEffect(() => {
+    // fetch(`http://127.0.0.1:8000/api/InfoView/${id}`)
+    //     .then(response => response.json())
+    //     .then(data => setTerrain(data))
+    //     .catch(error => console.error(error));
+    // }, [id]);
+    // const [terrain,setTerrain] =useState([])
+    // useEffect(() => {
+    //     fetchTerrain();
+       
+    // }, [id]);
+//     const fetchTerrain =async() =>{ // data from database
+//         await axios.get(`http://127.0.0.1:8000/api/InfoView/${id}`)
+//         .then(({data})=>{
+//             setTerrain(data) 
+//         })
+//     }
+    // const fetchTerrain =async() =>{ // data from database
+    //     await axios.get(`http://127.0.0.1:8000/api/InfoTerrain/${id}`)
+    //     .then(({data})=>{
+    //         setTerrain(data.terrain) 
+    //     })
+    // }
+
+    // const [terrain,setTerrain] =useState([])
 
     // useEffect(() => {
     //     const fetchTerrain = async () => {
@@ -63,7 +88,7 @@ const InfoView = ({id}) => {
         terrain.map((row,key) =>( */}
             <div className='container'>
             {/* <div key={key}> */}
-            <div>
+            <div >
             <Carousel>
             <Carousel.Item>
             {/* <img className="d-block img-fluid img" src={(`http://127.0.0.1:8000/img1/${row.img1}`)} alt="First slide"/> */}

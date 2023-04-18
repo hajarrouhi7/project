@@ -40,16 +40,19 @@ class InfoTerrainController extends Controller
             'message'=>'Stade added successful'
         ]);
     }
-    public function show($id){
+    // public function show($id)
+    // {
+    //     // Récupérer les données de l'utilisateur en utilisant l'identifiant
+    //     $terrain = InfoTerrain::find($id);
 
-        // Récupérer les données de la page par ID depuis la base de données
-        $infoTerrain=InfoTerrain::find($id);
-        if(!$infoTerrain){
-            return redirect()->route('InfoView')->with(['error'=>'Not Exist']);
-        }
-
-        return view('InfoView',compact('InfoTerrain'));
-
+    //     // Passer les données à la vue
+    //     return view('InfoTerrain.show', ['InfoTerrain' => $terrain]);
+    // }
+    public function show(string $id)
+    {
+        $terrain = InfoTerrain::findOrFail($id);
+        $jsonData = $infoTerrain->toJson();
+        return response()->json($jsonData);
     }
     public function search(Request $request)
     {
