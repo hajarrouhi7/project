@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import axios from "axios";
 import "./Info.css";
+import { useParams } from 'react-router-dom';
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import Carousel from 'react-bootstrap/Carousel';
@@ -10,26 +11,27 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-const InfoView = () => {
-    const [id, setId] = useState(null);
-    const [terrain,setTerrain] =useState([])
-    useEffect(() => {
-    if (id !== null) {
-        fetch(`http://127.0.0.1:8000/api/InfoView/${id}`)
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error(error));
-    }
-    }, [id]);
+const InfoView = ({id}) => {
 
-    //const [id, setId] = useState(); // initialize the ID to 1
+    // const [id, setId] = useState(null);
     // const [terrain,setTerrain] =useState([])
     // useEffect(() => {
-    // fetch(`http://127.0.0.1:8000/api/InfoView/${id}`)
+    // if (id !== null) {
+    //     fetch(`http://127.0.0.1:8000/api/InfoTerrain/${id}`)
     //     .then(response => response.json())
-    //     .then(data => setTerrain(data))
+    //     .then(data => console.log(data))
     //     .catch(error => console.error(error));
+    // }
     // }, [id]);
+
+    //const [id, setId] = useState(); // initialize the ID to 1
+    const [terrain,setTerrain] =useState([])
+    useEffect(() => {
+    fetch(`http://127.0.0.1:8000/api/InfoTerrain/${id}`)
+        .then(response => response.json())
+        .then(data => setTerrain(data))
+        .catch(error => console.error(error));
+    }, [id]);
     // const [terrain,setTerrain] =useState([])
     // useEffect(() => {
     //     fetchTerrain();
@@ -47,23 +49,18 @@ const InfoView = () => {
     //         setTerrain(data.terrain) 
     //     })
     // }
-
     // const [terrain,setTerrain] =useState([])
-
-    // useEffect(() => {
-    //     const fetchTerrain = async () => {
-    //     try {
-    //         const response = await axios.get(`http://127.0.0.1:8000/api/InfoView/${id}`) // Remplacez par l'URL de votre route Laravel
-    //         .then(({data})=>{
-    //             setTerrain(response.data.terrain) 
-    //         })
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    //     };
-
-    //     fetchTerrain();
-    // },[id]);
+    
+    // const fetchTerrain = async () => {
+    //     await axios.get(`http://127.0.0.1:8000/api/InfoView/${id}`)
+    //       .then(({ data }) => {
+    //         setTerrain(data) 
+    //       })
+    //   }
+      
+    //   useEffect(() => {
+    //     fetchTerrain()
+    //   }, [id])
 
     // useEffect(() => {
     //     fetchTerrain();
@@ -92,7 +89,7 @@ const InfoView = () => {
             <Carousel>
             <Carousel.Item>
             {/* <img className="d-block img-fluid img" src={(`http://127.0.0.1:8000/img1/${row.img1}`)} alt="First slide"/> */}
-            <img className="d-block img-fluid img" src={(`http://127.0.0.1:8000/img1/${terrain.img1}`)} alt="First slide"/>
+            <img className="d-block img-fluid img"  src={(`http://127.0.0.1:8000/img1/${terrain.img1}`)} alt="First slide"/>
             </Carousel.Item>
             <Carousel.Item>
             {/* <img className="d-block img-fluid img" src={(`http://127.0.0.1:8000/img2/${row.img2}`)} alt="First slide"/> */}

@@ -36,6 +36,7 @@ class InfoTerrainController extends Controller
         $terrain->ville = $request->ville;
         $terrain->price = $request->price;
         $terrain->save();
+        
         return response()->json([
             'message'=>'Stade added successful'
         ]);
@@ -48,11 +49,19 @@ class InfoTerrainController extends Controller
     //     // Passer les données à la vue
     //     return view('InfoTerrain.show', ['InfoTerrain' => $terrain]);
     // }
+    // public function show(string $id)
+    // {
+    //     try {
+    //         $terrain = InfoTerrain::findOrFail($id);
+    //         return response()->json($terrain);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['error' => $e->getMessage()],500);
+    //     }
+    // }
     public function show(string $id)
     {
         $terrain = InfoTerrain::findOrFail($id);
-        $jsonData = $infoTerrain->toJson();
-        return response()->json($jsonData);
+        return response()->json($terrain);
     }
     public function search(Request $request)
     {

@@ -12,6 +12,9 @@ use App\Http\Controllers\InfoTerrainController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//Route::get('/InfoView/{id}', [InfoTerrainController::class,'show']);
+Route::resource('/InfoTerrain',InfoTerrainController::class);
+
 // Route::get('/InfoView/{id}', 'InfoTerrainController@show');
 Route::get('/', function () {
     return view('welcome');
